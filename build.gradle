@@ -2,5 +2,4 @@ buildscript {
     ext {
         springBootVersion = '2.0.2.RELEASE'
     }
-
 }
