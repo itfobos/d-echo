@@ -1,12 +1,9 @@
 buildscript {
-    ext {
-        springBootVersion = '2.0.1.RELEASE'
-    }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${rootProject.springBootVersion}")
         classpath('io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE')
     }
 }
@@ -23,6 +20,10 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
 }
 
 dependencies {
@@ -33,11 +34,5 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.M9"
-    }
-}
-
-repositories {
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
     }
 }
