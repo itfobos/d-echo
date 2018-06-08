@@ -1,8 +1,14 @@
-version: "3"
+version: '2.1'
 
 services:
-
   config:
     build: config
+    image: turukin/d-echo-config
     ports:
       - 8888:8888
+
+  eureka:
+    build: discovery-service
+    image: turukin/d-echo-eureka
+    ports:
+      - 8761:8761
