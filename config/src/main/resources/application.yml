@@ -4,9 +4,13 @@ spring:
       server:
         native:
           search-locations: classpath:/shared
-#       TODO: add config for prod: git repo URL.
+#Use some git repo for prod configuration
+#        git:
+#          uri: ${HOME}/projects/config-repo
+
   profiles:
      active: native
+
   security:
     user:
       password: ${CONFIG_SERVICE_PASSWORD}
