@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/itfobos/d-echo.svg?branch=master)](https://travis-ci.com/itfobos/d-echo)
+
 # d-echo
 Spring Cloud based, distributed echo server.
 
