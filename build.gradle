@@ -23,8 +23,8 @@ subprojects {
         baseName = "d-echo-${project.name}"
     }
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 1.11
+    targetCompatibility = 1.11
 
     dependencies {
         testCompile('org.springframework.boot:spring-boot-starter-test')

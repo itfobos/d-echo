@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM turukin/ubuntu-jdk:v11
 
 LABEL maintainer="ILya Turukin <turukin@gmail.com>"
 
