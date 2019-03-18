@@ -10,7 +10,13 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-# safelist
+
 branches:
+  #safelist
   only:
     - master
+
+  #blocklist
+  except:
+    #all
+    - /.*/
