@@ -4,6 +4,7 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_USER: $CONFIG_SERVICE_USER
     image: turukin/d-echo-config
     restart: always
     logging:
@@ -14,13 +15,12 @@ services:
   eureka:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_USER: $CONFIG_SERVICE_USER
     image: turukin/d-echo-eureka
     restart: always
     depends_on:
       config:
         condition: service_healthy
-    ports:
-      - 8761:8761
     logging:
       options:
         max-size: "10m"

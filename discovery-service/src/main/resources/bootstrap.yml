@@ -1,8 +1,14 @@
+server:
+  port: 8761
+
 spring:
   application:
     name: discovery-service
   cloud:
     config:
+      uri: http://config:8888
+      username: ${CONFIG_SERVICE_USER}
+      password: ${CONFIG_SERVICE_PASSWORD}
       fail-fast: true
 
 eureka:
