@@ -12,3 +12,9 @@ services:
     image: turukin/d-echo-eureka
     ports:
       - 8761:8761
+
+  echo:
+    build: echo-service
+    image: turukin/d-echo-echo
+    ports:
+      - 8778:8778
