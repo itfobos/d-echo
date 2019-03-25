@@ -10,3 +10,13 @@ spring:
       username: ${CONFIG_SERVICE_USER}
       password: ${CONFIG_SERVICE_PASSWORD}
       fail-fast: true
+
+eureka:
+  client:
+    fetchRegistry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "routes, refresh"

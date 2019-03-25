@@ -1,0 +1,17 @@
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix:
+            #TODO: enable the logging level only for dev profile
+            zuul: trace
+
+zuul:
+  ignoredServices: '*'
+
+  routes:
+    echo-service:
+      path: /echos/**
+      serviceId: echo-service
+      sensitiveHeaders:
