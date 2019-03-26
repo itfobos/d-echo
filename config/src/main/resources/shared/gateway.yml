@@ -11,15 +11,14 @@ ribbon:
   ConnectTimeout: 20000
 
 zuul:
-#  ignoredServices: '*'
+  ignoredServices: '*'
+
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
 
   routes:
     echo-service:
-      path: /echo/**
-      url: http://localhost:8778/
-#      serviceId: echo-service
-#      stripPrefix: false
-#      sensitiveHeaders:
+      path: /echos/**
+      serviceId: echo-service
+      sensitiveHeaders:
