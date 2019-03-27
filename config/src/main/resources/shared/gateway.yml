@@ -1,0 +1,20 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+eureka:
+  client:
+    fetchRegistry: true
+
+zuul:
+  ignoredServices: '*'
+
+  routes:
+    echo-service:
+      path: /echos/**
+      serviceId: echo-service
+      sensitiveHeaders:
