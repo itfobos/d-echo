@@ -6,16 +6,12 @@ hystrix:
           thread:
             timeoutInMilliseconds: 20000
 
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 20000
+eureka:
+  client:
+    fetchRegistry: true
 
 zuul:
   ignoredServices: '*'
-
-  host:
-    connect-timeout-millis: 20000
-    socket-timeout-millis: 20000
 
   routes:
     echo-service:
