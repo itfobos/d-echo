@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: migrations/001-account-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: migrations/002-test-account.yml
+      relativeToChangelogFile: true

@@ -20,7 +20,7 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
 
     bootJar {
-        baseName = "d-echo-${project.name}"
+        archiveBaseName = "d-echo-${project.name}"
     }
 
     sourceCompatibility = 1.11

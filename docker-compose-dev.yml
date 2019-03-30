@@ -24,3 +24,13 @@ services:
     image: turukin/d-echo-gateway
     ports:
       - 4000:4000
+
+  auth:
+    build: auth
+    image: turukin/d-echo-auth
+    ports:
+      - 5000:8080
+
+  db:
+    ports:
+      - 5432:5432

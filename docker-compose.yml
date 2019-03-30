@@ -5,6 +5,9 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CONFIG_SERVICE_USER: $CONFIG_SERVICE_USER
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
     image: turukin/d-echo-config
     restart: always
     logging:
@@ -55,3 +58,37 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  auth:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_USER: $CONFIG_SERVICE_USER
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+    image: turukin/d-echo-auth
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+      db:
+        condition: service_started
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  db:
+    image: postgres:11.2
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    volumes:
+      - decho_postgresql_data:/var/lib/postgresql/data
+      - decho_postgresql:/var/lib/postgresql
+
+
+volumes:
+  decho_postgresql_data:
+  decho_postgresql:
