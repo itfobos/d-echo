@@ -1,15 +1,3 @@
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 20000
-
-eureka:
-  client:
-    fetchRegistry: true
-
 zuul:
   ignoredServices: '*'
 
@@ -18,3 +6,13 @@ zuul:
       path: /echos/**
       serviceId: echo-service
       sensitiveHeaders:
+
+    auth-service:
+      path: /auth/**
+      serviceId: auth-service
+      sensitiveHeaders:
+
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 20000
+
+eureka.client.fetchRegistry: true

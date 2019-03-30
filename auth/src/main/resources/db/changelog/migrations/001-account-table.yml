@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 'iturukin:10-account-table'
+      author: ILya Turukin
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    - primaryKey: true
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: login
+                  type: VARCHAR(255)
+                constraints:
+                  - nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: roles
+                  type: VARCHAR(255)
+                  constraints:
+                    - nullable: false
+        - addUniqueConstraint:
+            tableName: account
+            columnNames: login
+            constraintName: account_login_unique

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 'iturukin:10-test-account'
+      author: ILya Turukin
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 0
+              - column:
+                  name: login
+                  value: 'test'
+              - column:
+                  name: password
+                  value: 'b18c123d8941e49e20d63f003af675ee2cf39766ef9b2d914566f87538285d10'
+              - column:
+                  name: email
+                  value: 'test@test.org'
+              - column:
+                  name: roles
+                  value: 'ROLE_USER,ROLE_ADMIN'
