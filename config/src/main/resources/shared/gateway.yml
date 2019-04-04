@@ -16,3 +16,5 @@ zuul:
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 20000
 
 eureka.client.fetchRegistry: true
+
+management.endpoints.web.exposure.include: "info, health, refresh, routes"
