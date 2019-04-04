@@ -9,3 +9,7 @@ eureka:
 
 logging.level:
   com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
+
+management:
+  endpoints.web.exposure.include: "info, health, refresh"
+  info.git.mode: simple
