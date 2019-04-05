@@ -18,7 +18,7 @@ public class UserProfile {
                 .toArray(String[]::new);
     }
 
-    public String getRolesAsString() {
+    protected String getRolesAsString() {
         return String.join(",", this.roles);
     }
 
@@ -27,5 +27,11 @@ public class UserProfile {
         this.id = null;
         this.login = null;
         this.roles = null;
+    }
+
+    protected UserProfile(Long id, String login, String[] roles) {
+        this.id = id;
+        this.login = login;
+        this.roles = roles;
     }
 }

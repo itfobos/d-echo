@@ -1,5 +1,6 @@
 package common.model;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,5 +45,12 @@ public class UserProfileRolesTest {
         Assert.assertArrayEquals(new String[]{ADMIN_ROLE}, profile.roles);
     }
 
-    //TODO: #31 Add getRolesAsString test
+    @Test
+    public void getRolesAsStringTest() {
+        final String srcRolesAsString = ADMIN_ROLE + "," + USER_ROLE;
+
+        UserProfile profile = new UserProfile(null, null, srcRolesAsString);
+
+        Assert.assertThat(profile.getRolesAsString(), Matchers.equalTo(srcRolesAsString));
+    }
 }

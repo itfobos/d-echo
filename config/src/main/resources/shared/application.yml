@@ -13,3 +13,7 @@ logging.level:
 management:
   endpoints.web.exposure.include: "info, health, refresh"
   info.git.mode: simple
+
+echo.auth:
+  cookie.name: D-ECHO-AUTH
+  http.header.name: Authorization

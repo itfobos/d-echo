@@ -4,8 +4,8 @@ package auth.rest;
 import auth.password.AuthService;
 import auth.rest.model.LoginRequest;
 import auth.rest.model.LoginResponse;
-import common.filter.AuthenticationFilter;
 import common.model.UserProfile;
+import common.token.TokenProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,14 @@ public class LoginController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private TokenProducer tokenProducer;
+
     @Value("${auth.usual.cookie.maxAge.sec:1800}")
     private int authCookieMaxAge;
+
+    @Value("${echo.auth.cookie.name}")
+    private String cookieName;
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,16 +48,14 @@ public class LoginController {
 
         Optional<UserProfile> profileOptional = authService.authenticate(loginRequest.login, loginRequest.password);
 
-
         Optional<ResponseEntity<LoginResponse>> responseOptional = profileOptional
-                .map(
-                        //TODO: [#31] generate token
-                        userProfile -> new ResponseEntity<>(new LoginResponse("stub_token"), HttpStatus.CREATED)
-                );
+                .map(userProfile -> tokenProducer.produce(userProfile))
+                .map(LoginResponse::new)
+                .map(loginResponse -> new ResponseEntity<>(loginResponse, HttpStatus.CREATED));
 
         responseOptional.ifPresent(responseEntity -> {
             //noinspection ConstantConditions
-            Cookie cookie = new Cookie(AuthenticationFilter.DEFAULT_AUTH_COOKIE_NAME, responseEntity.getBody().token);
+            Cookie cookie = new Cookie(cookieName, responseEntity.getBody().token);
             cookie.setPath("/");
             cookie.setMaxAge(authCookieMaxAge);
 
@@ -67,11 +71,11 @@ public class LoginController {
     @DeleteMapping("/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie(AuthenticationFilter.DEFAULT_AUTH_COOKIE_NAME, null);
+        Cookie cookie = new Cookie(cookieName, null);
         cookie.setPath("/");
 
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        logger.debug("Cookie {} is removed", AuthenticationFilter.DEFAULT_AUTH_COOKIE_NAME);
+        logger.debug("Cookie {} is removed", cookieName);
     }
 }
