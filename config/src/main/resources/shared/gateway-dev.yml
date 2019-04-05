@@ -1,7 +1,6 @@
 logging:
   level:
-    org:
-      springframework:
-        cloud:
-          netflix:
-            zuul: debug
+    org.springframework:
+      security: info
+      cloud.netflix.zuul: debug
+    gateway: debug
