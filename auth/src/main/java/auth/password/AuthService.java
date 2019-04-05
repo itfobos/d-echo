@@ -1,10 +1,11 @@
 package auth.password;
 
-import auth.common.UserProfile;
 import auth.persistence.AccountEntity;
 import auth.persistence.AccountEntityRepository;
+import common.model.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class AuthService {
 
     private final PasswordEncoder passwordEncoder = new PasswordEncoder();
 
+    @Transactional(readOnly = true)
     public Optional<UserProfile> authenticate(String login, String password) {
         Optional<AccountEntity> accEntityOptional = accountEntityRepository.findByLogin(login);
 

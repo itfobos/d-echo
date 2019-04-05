@@ -1,9 +1,11 @@
 package auth.rest;
 
-import auth.common.UserProfile;
+
 import auth.password.AuthService;
 import auth.rest.model.LoginRequest;
 import auth.rest.model.LoginResponse;
+import common.filter.AuthenticationFilter;
+import common.model.UserProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,6 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    //TODO: [#31] move in some common place
-    private static final String DEFAULT_AUTH_COOKIE_NAME = "APP_AUTH";
-
     @Autowired
     private AuthService authService;
 
@@ -52,7 +51,7 @@ public class LoginController {
 
         responseOptional.ifPresent(responseEntity -> {
             //noinspection ConstantConditions
-            Cookie cookie = new Cookie(DEFAULT_AUTH_COOKIE_NAME, responseEntity.getBody().token);
+            Cookie cookie = new Cookie(AuthenticationFilter.DEFAULT_AUTH_COOKIE_NAME, responseEntity.getBody().token);
             cookie.setPath("/");
             cookie.setMaxAge(authCookieMaxAge);
 
@@ -68,11 +67,11 @@ public class LoginController {
     @DeleteMapping("/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie(DEFAULT_AUTH_COOKIE_NAME, null);
+        Cookie cookie = new Cookie(AuthenticationFilter.DEFAULT_AUTH_COOKIE_NAME, null);
         cookie.setPath("/");
 
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        logger.debug("Cookie {} is removed", DEFAULT_AUTH_COOKIE_NAME);
+        logger.debug("Cookie {} is removed", AuthenticationFilter.DEFAULT_AUTH_COOKIE_NAME);
     }
 }
