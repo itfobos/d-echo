@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+archivesBaseName = 'd-echo-common'
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}

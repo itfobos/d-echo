@@ -1,8 +1,7 @@
-package auth.common;
+package common.model;
 
 import java.util.Arrays;
 
-//TODO: [#31] move in some common place
 public class UserProfile {
     private static final String ROLES_DELIMITER = ",";
 

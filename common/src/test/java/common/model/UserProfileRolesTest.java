@@ -1,4 +1,4 @@
-package auth.common;
+package common.model;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,4 +43,6 @@ public class UserProfileRolesTest {
 
         Assert.assertArrayEquals(new String[]{ADMIN_ROLE}, profile.roles);
     }
+
+    //TODO: #31 Add getRolesAsString test
 }

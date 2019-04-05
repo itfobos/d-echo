@@ -16,6 +16,12 @@ buildscript {
 subprojects {
     repositories {
         mavenCentral()
+    }
+}
+
+configure(subprojects.findAll { it.name != 'common' }) {
+    repositories {
+        mavenCentral()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
@@ -33,7 +39,6 @@ subprojects {
     targetCompatibility = 1.11
 
     dependencies {
-        testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
     dependencyManagement {
