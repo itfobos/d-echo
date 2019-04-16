@@ -50,6 +50,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CONFIG_SERVICE_USER: $CONFIG_SERVICE_USER
+      JWT_SIGNATURE_PUBLIC_KEY: $JWT_SIGNATURE_PUBLIC_KEY
     restart: always
     depends_on:
       config:
@@ -66,6 +67,7 @@ services:
       DB_USER: $DB_USER
       DB_PASSWORD: $DB_PASSWORD
       DB_NAME: $DB_NAME
+      JWT_SIGNATURE_PRIVATE_KEY: $JWT_SIGNATURE_PRIVATE_KEY
     image: turukin/d-echo-auth
     restart: always
     depends_on:
