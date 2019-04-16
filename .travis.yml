@@ -1,5 +1,9 @@
-language: java
+sudo: required
 
+services:
+  - docker
+
+language: java
 jdk: oraclejdk11
 
 before_cache:
@@ -13,3 +17,20 @@ cache:
 branches:
   only:
     - master
+
+before_deploy:
+  - chmod a+x docker-images-build.sh
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: bash docker-images-build.sh
+  on:
+    branch: master
+
+env:
+  global:
+    #DOCKER_USER and DOCKER_PASS are encrypted
+    - secure: DyfN24CcNotuONA+Lz5iJdNBPp+29whhWTZZ4G1BbbgOMiG3OHkma4lhi1/FZ6wRTf7cAAH8EiItxv4bdqr7bJuiVjUmV9GtFVTiHpORGijL4INuskdiR29clEEbD+NFwdHhukgh1PV8JgRda61ByYa19VdgEk8jUymMzgpgn/M5PjIMCYba1ONCqHCku6ZDO09Rdmhd3FXrBrRQdBxbz5NrJm+62DzcnCm5Cn3N9dtgPOCmB405Lg1JcsgG+lRo+WQufwdgBwxVN4jE9sLIIX9tuEyk6IGrfJ6cWO8K7chvpMS1+7dEZvQW2LGHeosiB/kviNYq4No8WX92ojsHrdJKbM7saj10blrdWT41FqabpglOwNkuCe+F+c56hLwdJkrU+0Dd9OWm3bcJScDmvTViKCmm0lZyLDIFQ5QFrQ0/eR7ED3ak+gmOohgCmNe7Y/4NHFbh88K9c/nzfw7qdPxoKYEhNLy5xqzg2xkmMUrOvk3CJdX8B1vIJDw0q71CtoIKLyCSAhc4m1kHyYCeNAtk3PTkRp4CJFe67v82tG58IdGotnvYEM4nJh2fx1ddU+vWjLQnKs4iAqw3Ljw0yIIgOSTphXiYJWx8vbzDtg5e97zP+3XXGcfGUdxP+2k4f3QblqZxKwgoqidcHrG8M5C/RX32Aah+nlnTGl7yfZQ=
+    - secure: QBibXOqEKBM5OM6FyMwCMFvjRHBDNCOsHA77LOd+QThPEhMpYA1p/u/+bbJc2RskPBJEr3zsQuZ/Mw7ySox9fYuL/GRqMzmRdJhtlNgW86STuUvHZYVHf3mWBbBMbkPbRqQ/DKfLOgVy1KuMr/jT4lh6MIJk8R08Kc7OaRoJi/lXRRkN/UMIjiFR9EQ7t0xVxNpGy0ZL77mlCnVTEOZbSMrCYRuHbj08hl5Ob4pdl2UGii4UkikqVEDpss00cRjmjANOFrp0g/8TiMeX1oq2TBWdF6pdc8AhtueHOajfohARogY0dW0EJdJbND2Pf6YwWSjx1z2bhwb6v7FQuDDDlNHMopfEklbP6josAU9xq1povbozad0aBIEp0W5RVtoeMzB4SOerJeUm+Z4iM09qpRbzMQg4wqQK9PaipAjInrNvqaHYdKJYG7VrojJaKU/mqlr20M5o/w+6qblTkcf4mxC327LJ0gEYNThVh5OG3VgDQo9pouMyP/E6VU+da2GCaetqp7vXEwLK3yWOMexnOcdecollBPfJtv4ty1KcCRPAHm11iYQvWJzUbYQXi/tiM1v0pQ6r7xt/8S9E5vycnOWVC+eoFkUg22qbA1yfsoZabgpu2qWj5fF2spALgzMgitJA7HD3mmUHIsgwjyFvC+RgGBRtb2/CO4ZUB3qjTQE=
+    - COMMIT=${TRAVIS_COMMIT::7}
