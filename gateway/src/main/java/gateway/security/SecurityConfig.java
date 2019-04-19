@@ -4,6 +4,13 @@ package gateway.security;
 import common.token.TokenParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.actuate.health.HealthEndpoint;
+import org.springframework.boot.actuate.info.InfoEndpoint;
+import org.springframework.boot.actuate.trace.http.HttpTraceEndpoint;
+import org.springframework.cloud.endpoint.RefreshEndpoint;
+import org.springframework.cloud.netflix.zuul.RoutesEndpoint;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -34,6 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers("/**/login/**").permitAll()
+                .requestMatchers(EndpointRequest.to(
+                        RefreshEndpoint.class,
+                        RoutesEndpoint.class,
+                        HttpTraceEndpoint.class)
+                ).hasAuthority("ACTUATOR_ADMIN")
+                .requestMatchers(EndpointRequest.to(HealthEndpoint.class, InfoEndpoint.class)).permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated();
 

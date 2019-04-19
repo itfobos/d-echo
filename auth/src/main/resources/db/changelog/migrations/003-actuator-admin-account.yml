@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 'iturukin:34-actuator-endpoints-security'
+      author: ILya Turukin
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: login
+                  value: 'actuatoradmin'
+              - column:
+                  name: password
+                  value: '9d29baa8edf63e808229bfdced9f59a755629a1b88fdd222dfc19196c4d637ad'
+              - column:
+                  name: email
+                  value: 'actuatoradmin@test.org'
+              - column:
+                  name: roles
+                  value: 'ACTUATOR_ADMIN'

@@ -15,7 +15,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
@@ -36,7 +35,6 @@ class AuthFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         Optional<String> tokenOptional = getAuthTokenFromHeader(httpRequest).or(() -> getAuthTokenFromCookie(httpRequest));
 
@@ -48,10 +46,7 @@ class AuthFilter extends GenericFilterBean {
                             logger.debug("Authenticated as {} ", userAuthentication.getName());
                             SecurityContextHolder.getContext().setAuthentication(userAuthentication);
                         },
-                        () -> {
-                            logger.debug("No user is authenticated.");
-                            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                        }
+                        () -> logger.debug("No user is authenticated.")
                 );
 
         // do secured processing
