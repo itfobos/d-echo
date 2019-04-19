@@ -60,4 +60,14 @@ public class UserAuthentication implements Authentication {
     public String getName() {
         return userProfile.login;
     }
+
+    @Override
+    public String toString() {
+        return "UserAuthentication{" +
+                "userProfile=" + userProfile +
+                ", roles=" + roles +
+                ", token='" + token + '\'' +
+                ", authenticated=" + authenticated +
+                '}';
+    }
 }

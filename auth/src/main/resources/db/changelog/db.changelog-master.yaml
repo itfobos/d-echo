@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: migrations/002-test-account.yml
       relativeToChangelogFile: true
+  - include:
+      file: migrations/003-actuator-admin-account.yml
+      relativeToChangelogFile: true

@@ -10,6 +10,7 @@ databaseChangeLog:
                   name: id
                   type: BIGINT
                   autoIncrement: true
+                  startWith: 100
                   constraints:
                     - primaryKey: true
               - column:

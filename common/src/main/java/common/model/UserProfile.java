@@ -34,4 +34,13 @@ public class UserProfile {
         this.login = login;
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", roles=" + Arrays.toString(roles) +
+                '}';
+    }
 }
